@@ -51,13 +51,13 @@ After that, I created the `nx`, `ny`, `objpoints`, `imagepoints` variables in or
 
 #### 2. Describe how (and identify where in your code) you used color transforms, gradients or other methods to create a thresholded binary image.  Provide an example of a binary image result.
 
-I used a combination of color and gradient thresholds to generate a binary image (thresholding steps at lines # through # in `another_file.py`).  Here's an example of my output for this step.  (note: this is not actually from one of the test images)
-
-![alt text][image3]
+As I went throught the project I decided to write a function that included every single threshold and show and example as the function was created. At the end of it, I combined them all and applied to both the chessboard image selected and the `hightway_test1.jpg` image.
+This process made me realize that spiltting my code in smaller sections was easier to debug since I didn't have to look through various lines. By the time I combined all the thresholded with HLS, the function worked smoothly; which surprised myself since most of the times something goes wrong along the way.
+Examples of images can be found in the notebook as each function is created.
 
 #### 3. Describe how (and identify where in your code) you performed a perspective transform and provide an example of a transformed image.
 
-The code for my perspective transform includes a function called `warper()`, which appears in lines 1 through 8 in the file `example.py` (output_images/examples/example.py) (or, for example, in the 3rd code cell of the IPython notebook).  The `warper()` function takes as inputs an image (`img`), as well as source (`src`) and destination (`dst`) points.  I chose the hardcode the source and destination points in the following manner:
+This portion of the project was more of copying and pasting from the lesson.
 
 ```python
 src = np.float32(
