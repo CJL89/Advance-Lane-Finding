@@ -57,8 +57,7 @@ Examples of images can be found in the notebook as each function is created.
 
 #### 3. Describe how (and identify where in your code) you performed a perspective transform and provide an example of a transformed image.
 
-This portion of the project was more of copying and pasting from the lesson.
-
+This portion of the project was more of copying and pasting from the lessons. I used the `img_size`:
 ```python
 src = np.float32(
     [[(img_size[0] / 2) - 55, img_size[1] / 2 + 100],
@@ -71,43 +70,28 @@ dst = np.float32(
     [(img_size[0] * 3 / 4), img_size[1]],
     [(img_size[0] * 3 / 4), 0]])
 ```
-
-This resulted in the following source and destination points:
-
-| Source        | Destination   | 
-|:-------------:|:-------------:| 
-| 585, 460      | 320, 0        | 
-| 203, 720      | 320, 720      |
-| 1127, 720     | 960, 720      |
-| 695, 460      | 960, 0        |
-
-I verified that my perspective transform was working as expected by drawing the `src` and `dst` points onto a test image and its warped counterpart to verify that the lines appear parallel in the warped image.
-
-![alt text][image4]
+After grabbing the sizes of the image and submitting the undistorted images through the combined threshold functions, I made the `birds_eye_view` function and passed the images.
+[Example of the image can be found on line 37]
 
 #### 4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
 
-Then I did some other stuff and fit my lane lines with a 2nd order polynomial kinda like this:
-
-![alt text][image5]
+After creating and passing image through the function `birds_eye_view`; this allowed me to make the histogram where the lanes are marked by the histogram. After that I passed the bird eye view image and previewed the image marking the lanes and finding the polynomial.
+[Example of the image can be found on line 42]
 
 #### 5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
 
-I did this in lines # through # in my code in `my_other_file.py`
+After finding the polynomial, I found the radius and curvature of the lane and the position of the vehicle. With this result, I was able to draw the shade on the lanes.
 
 #### 6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
 
-I implemented this step in lines # through # in my code in `yet_another_file.py` in the function `map_lane()`.  Here is an example of my result on a test image:
-
-![alt text][image6]
-
----
+All example images are found on the directory `output_images`.
 
 ### Pipeline (video)
 
 #### 1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (wobbly lines are ok but no catastrophic failures that would cause the car to drive off the road!).
 
-Here's a [link to my video result](./project_video.mp4)
+The only function I had to create for the pipeline was the one that finds the lanes since the threshold and combination were previuosly created. The main reason I didn't create the `find_lane` functions before was because I couldn't find a resonable part to split it into smaller pieces and I decided to create a big function.
+However, the first time I did not want to do this because a bigger function could introduce more problems and is harder to debug; making the project more difficult.
 
 ---
 
@@ -115,4 +99,4 @@ Here's a [link to my video result](./project_video.mp4)
 
 #### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
 
-Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.  
+My pipeline in the video is not the best one but on the pictures works pretty well.
