@@ -60,16 +60,17 @@ Examples of images can be found in the notebook as each function is created.
 This portion of the project was more of copying and pasting from the lessons. I used the `img_size`:
 ```python
 src = np.float32(
-    [[(img_size[0] / 2) - 55, img_size[1] / 2 + 100],
+    [[(img_size[0] / 2) - 55, img_size[1] / 2 + 108],
     [((img_size[0] / 6) - 10), img_size[1]],
     [(img_size[0] * 5 / 6) + 60, img_size[1]],
-    [(img_size[0] / 2 + 55), img_size[1] / 2 + 100]])
+    [(img_size[0] / 2 + 55), img_size[1] / 2 + 108]])
 dst = np.float32(
     [[(img_size[0] / 4), 0],
     [(img_size[0] / 4), img_size[1]],
     [(img_size[0] * 3 / 4), img_size[1]],
     [(img_size[0] * 3 / 4), 0]])
 ```
+I change the value to 108 since I found in the forums that it actually provided with better results.
 After grabbing the sizes of the image and submitting the undistorted images through the combined threshold functions, I made the `birds_eye_view` function and passed the images.
 [Example of the image can be found on line 37]
 
@@ -80,7 +81,7 @@ After creating and passing image through the function `birds_eye_view`; this all
 
 #### 5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
 
-After finding the polynomial, I found the radius and curvature of the lane and the position of the vehicle. With this result, I was able to draw the shade on the lanes.
+After finding the polynomial, I found the radius and curvature of the lane and the position of the vehicle. With this result, I was able to draw the shade on the lanes. The function `draw_shades` iterates through the images and returns the drawn shades on the images.
 
 #### 6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
 
@@ -90,8 +91,7 @@ All example images are found on the directory `output_images`.
 
 #### 1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (wobbly lines are ok but no catastrophic failures that would cause the car to drive off the road!).
 
-The only function I had to create for the pipeline was the one that finds the lanes since the threshold and combination were previuosly created. The main reason I didn't create the `find_lane` functions before was because I couldn't find a resonable part to split it into smaller pieces and I decided to create a big function.
-However, the first time I did not want to do this because a bigger function could introduce more problems and is harder to debug; making the project more difficult.
+The pipeline introduces all the functions that were created throught the entire project and then some checks on the different lanes that pass through the images. My initial pipeline was shorter and simpler, but was having traouble detecting the change of colors, shadows or reflections of the lanes so I had to find a way to be able to save the different results and go based on the previous findings rather than actually analizing each individual image by itself.
 
 ---
 
@@ -99,4 +99,5 @@ However, the first time I did not want to do this because a bigger function coul
 
 #### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
 
-My pipeline in the video is not the best one but on the pictures works pretty well.
+The toughest part was figuring out what was wrong with my pipeline. At the beginning I thought my thresholds were not good enough, but then I realized that my pipeline was analizing each frame individually rather than taking the result of the previous frame to help achieve a result. By not saving the results that my pipeline got, whenever the image presented a change of color on the road, shadows or reflections, the drawn shades will break.
+This is when I started looking at the Lines class that was suggested in the classroom. Even though it was suggested, I believe it is a crucial part of the project to be able to get good results. I think in the classroom, there should be more time or one section that should be talked about implementing the class since it will help a lot.
